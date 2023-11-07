@@ -41,14 +41,14 @@ names = [
 	if line.split(",")[0] != "name"
 ]
 
-for line in lines:
-	print(line)
+#for line in lines:
+#	print(line)
 
-#vectorstore.add_texts(texts=lines, ids=names)
+vectorstore.add_texts(texts=lines, ids=names)
 
 #ids = ["_".join(line.split(" ")[:2]).lower().replace(",", " ") for line in lines]
 
-for id in names:
-	print(id)
+#for id in names:
+#	print(id)
 
 #vector_store.add_texts(texts=lines, ids=ids)
