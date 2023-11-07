@@ -20,7 +20,7 @@ auth_provider = PlainTextAuthProvider(ASTRA_CLIENT_ID, ASTRA_DB_TOKEN)
 cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider, protocol_version=4)
 session = cluster.connect()
 
-embeddings = HuggingFaceEmbeddings()
+embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 vectorstore = Cassandra(embeddings, session, KEYSPACE_NAME, TABLE_NAME)
 
 # load and process file
