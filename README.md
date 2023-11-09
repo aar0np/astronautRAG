@@ -13,6 +13,18 @@ export ASTRA_DB_ID=cab0blah-blah-blah-blah-e4199blah536
 export OPENAI_API_KEY=sk-6gblahblahblahbittyblahtpp
 ```
 
+### Cassandra Table
+Requires the followng table to be present in Astra DB.
+
+```sql
+CREATE TABLE astronaut_vectors (
+    row_id TEXT PRIMARY KEY,
+    attributes_blob TEXT,
+    body_blob TEXT,
+    metadata_s MAP<TEXT, TEXT>,
+    vector vector<FLOAT, 1536>);
+```
+
 ## Functionality
 
 ### astronautLoader

@@ -24,8 +24,7 @@ cassio.init(
 astronaut_template = """
 You are a NASA historian, tasked with answering space enthusiasts' questions.
 You must answer based only on the provided context, do not make up any fact.
-Your answers must be concise and to the point, but strive to provide factual details
-(such as family, order, Latin names, and so on when appropriate).
+Your answers must be concise and to the point, but strive to provide factual details.
 You MUST refuse to answer questions on other topics than NASA astronaut history,
 as well as questions whose answer is not found in the provided context.
 
@@ -54,6 +53,7 @@ userInput = "which three astronauts flew on apollo 11?"
 
 while userInput != "exit":
     print(chain.invoke(userInput))
+    print("\n")
     userInput = input("Next question? ")
 
 print("Exiting...")
