@@ -17,12 +17,16 @@ export OPENAI_API_KEY=sk-6gblahblahblahbittyblahtpp
 Requires the followng table to be present in Astra DB.
 
 ```sql
-CREATE TABLE astronaut_vectors (
+CREATE TABLE astronaut_openai_vectors (
     row_id TEXT PRIMARY KEY,
     attributes_blob TEXT,
     body_blob TEXT,
     metadata_s MAP<TEXT, TEXT>,
     vector vector<FLOAT, 1536>);
+
+CREATE CUSTOM INDEX eidx_metadata_s_astronaut_openai_vectors ON astronaut_openai_vectors (entries(metadata_s)) USING 'org.apache.cassandra.index.sai.StorageAttachedIndex';
+
+CREATE CUSTOM INDEX idx_vector_astronaut_openai_vectors ON astronaut_openai_vectors (vector) USING 'org.apache.cassandra.index.sai.StorageAttachedIndex';
 ```
 
 ## Functionality
