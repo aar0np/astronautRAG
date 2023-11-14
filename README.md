@@ -2,6 +2,7 @@
 Uses an OpenAI ChatGPT model to serve as a conversational knowledge base about NASA's astronaut history (data originally from Kaggle's [Astronaut database](https://www.kaggle.com/datasets/jessemostipak/astronaut-database?select=astronauts.csv)). While an OpenAI API key is required to access the model, the resulting vector embeddings are stored in DataStax Astra DB. Astra DB is accessed via an integration with [LangChain](https://python.langchain.com/docs/get_started/introduction) and [CassIO](https://cassio.org/).
 
 ## Requirements
+ - Python libraries: `pip install cassandra-driver cassio langchain`
  - A vector-enabled [Astra DB](https://astra.datastax.com) database
  - An Astra DB application token (with DBA priviliges)
  - An OpenAI account and API key
