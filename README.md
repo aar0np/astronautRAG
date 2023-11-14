@@ -43,14 +43,23 @@ Once it answers that question, it loops to ask for more questions until the comm
 ```
 » python astronautRAG.py
 The three astronauts who flew on Apollo 11 were Michael Collins, Neil Armstrong, and Buzz Aldrin.
+
 Next question? which astronauts attended the University of Minnesota?
+
 Duane G. Carey attended the University of Minnesota-Minneapolis.
+
 Next question? which astronauts attended Purdue University?
+
 Eugene A. Cernan and Donald E. Williams attended Purdue University.
+
 Next question? which astronauts flew on the Gemini 4 mission?
+
 James A. McDivitt flew on the Gemini 4 mission.
+
 Next question? What day was Jim Lovell born on?
+
 Jim Lovell was born on March 25, 1928.
+
 Next question? exit
 Exiting...
 ```

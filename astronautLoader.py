@@ -10,14 +10,13 @@ from langchain.embeddings import OpenAIEmbeddings
 ASTRA_DB_ID = os.environ["ASTRA_DB_ID"]
 ASTRA_DB_KEYSPACE = "vsearch"
 ASTRA_DB_TOKEN = os.environ['ASTRA_DB_APPLICATION_TOKEN']
-KEYSPACE_NAME = ASTRA_DB_KEYSPACE
 TABLE_NAME = 'astronaut_openai_vectors'
 
 # connect to Astra DB
 cassio.init(
     token=ASTRA_DB_TOKEN,
     database_id=ASTRA_DB_ID,
-    keyspace=KEYSPACE_NAME,
+    keyspace=ASTRA_DB_KEYSPACE,
 )
 
 # init LLM and embeddings model
