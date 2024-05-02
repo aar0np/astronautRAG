@@ -1,27 +1,29 @@
 import os
-import cassio
-from cassandra.cluster import Cluster
-from cassandra.auth import PlainTextAuthProvider
-from langchain.vectorstores import Cassandra
-#from langchain.chat_models import ChatOpenAI
-from langchain.embeddings import OpenAIEmbeddings
+from langchain_astradb import AstraDBVectorStore
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
 # define Astra DB vars
-ASTRA_DB_ID = os.environ["ASTRA_DB_ID"]
+ASTRA_DB_API_ENDPOINT= os.environ.get("ASTRA_DB_API_ENDPOINT")
+ASTRA_DB_TOKEN = os.environ.get('ASTRA_DB_APPLICATION_TOKEN')
 ASTRA_DB_KEYSPACE = "vsearch"
-ASTRA_DB_TOKEN = os.environ['ASTRA_DB_APPLICATION_TOKEN']
-TABLE_NAME = 'astronaut_openai_vectors'
-
-# connect to Astra DB
-cassio.init(
-    token=ASTRA_DB_TOKEN,
-    database_id=ASTRA_DB_ID,
-    keyspace=ASTRA_DB_KEYSPACE,
-)
+TABLE_NAME = 'astronaut_huggingface_vectors'
 
 # init LLM and embeddings model
-embeddings = OpenAIEmbeddings() #1536
-vectorstore = Cassandra(embedding=embeddings, table_name=TABLE_NAME, session=None, keyspace=None)
+#embeddings = OpenAIEmbeddings() #1536
+embeddings = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2",
+    model_kwargs={'device': 'cpu'},
+    encode_kwargs={'normalize_embeddings': False},
+)
+
+# connect to Astra DB
+vectorstore = AstraDBVectorStore(
+    embedding=embeddings,
+    collection_name=TABLE_NAME,
+    api_endpoint=ASTRA_DB_API_ENDPOINT,
+    token=ASTRA_DB_TOKEN,
+    namespace=ASTRA_DB_KEYSPACE,
+)
 
 # load and process file
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
