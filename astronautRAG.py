@@ -3,9 +3,8 @@ from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import RunnablePassthrough
 from langchain_astradb import AstraDBVectorStore
-from langchain_openai import ChatOpenAI
 from langchain_community.embeddings import HuggingFaceEmbeddings
-
+from langchain_community.llms import HuggingFaceHub
 
 # define Astra DB vars
 ASTRA_DB_API_ENDPOINT= os.environ.get("ASTRA_DB_API_ENDPOINT")
@@ -26,8 +25,17 @@ CONTEXT:
 QUESTION: {question}
 
 YOUR ANSWER:"""
-
-llm = ChatOpenAI()
+#llm = ChatOpenAI()
+llm = HuggingFaceHub(
+    repo_id="HuggingFaceH4/zephyr-7b-beta",
+    task="text-generation",
+    model_kwargs={
+        "max_new_tokens": 512,
+        "top_k": 30,
+        "temperature": 0.01,
+        "repetition_penalty": 1.03,
+    },
+)
 # init LLM and embeddings model
 #embeddings = OpenAIEmbeddings() #1536
 embeddings = HuggingFaceEmbeddings(

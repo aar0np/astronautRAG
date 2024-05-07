@@ -8,8 +8,8 @@ ASTRA_DB_TOKEN = os.environ.get('ASTRA_DB_APPLICATION_TOKEN')
 ASTRA_DB_KEYSPACE = "vsearch"
 TABLE_NAME = 'astronaut_huggingface_vectors'
 
+#embeddings = OpenAIEmbeddings()
 # init LLM and embeddings model
-#embeddings = OpenAIEmbeddings() #1536
 embeddings = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2",
     model_kwargs={'device': 'cpu'},
